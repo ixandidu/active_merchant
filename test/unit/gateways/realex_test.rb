@@ -126,8 +126,9 @@ class RealexTest < Test::Unit::TestCase
   def test_capture_xml
     @gateway.expects(:new_timestamp).returns('20090824160201')
     
-    valid_capture_xml = <<-SRC
-<request timestamp="20090824160201" type="settle">
+    valid_capture_xml_timestamp    = %(timestamp="20090824160201")
+    valid_capture_xml_request_type = %(type="settle")
+    valid_capture_xml_body         = <<-SRC
   <merchantid>your_merchant_id</merchantid>
   <account>your_account</account>
   <orderid>1</orderid>
@@ -137,7 +138,10 @@ class RealexTest < Test::Unit::TestCase
 </request>
 SRC
     
-    assert_equal valid_capture_xml, @gateway.build_capture_request('1;4321;1234', {})
+    generated_xml = @gateway.build_capture_request('1;4321;1234', {})
+    assert_match valid_capture_xml_timestamp,    generated_xml
+    assert_match valid_capture_xml_request_type, generated_xml
+    assert_match valid_capture_xml_body,         generated_xml
   end
   
   def test_purchase_xml
@@ -147,8 +151,9 @@ SRC
 
     @gateway.expects(:new_timestamp).returns('20090824160201')
 
-    valid_purchase_request_xml = <<-SRC
-<request timestamp="20090824160201" type="auth">
+    valid_purchase_request_xml_timestamp    = %(timestamp="20090824160201")
+    valid_purchase_request_xml_request_type = %(type="auth")
+    valid_purchase_request_xml_body         = <<-SRC
   <merchantid>your_merchant_id</merchantid>
   <account>your_account</account>
   <orderid>1</orderid>
@@ -169,14 +174,18 @@ SRC
 </request>
 SRC
 
-    assert_equal valid_purchase_request_xml, @gateway.build_purchase_or_authorization_request(:purchase, @amount, @credit_card, options)
+    generated_xml = @gateway.build_purchase_or_authorization_request(:purchase, @amount, @credit_card, options)
+    assert_match valid_purchase_request_xml_timestamp,    generated_xml
+    assert_match valid_purchase_request_xml_request_type, generated_xml
+    assert_match valid_purchase_request_xml_body,         generated_xml
   end
   
   def test_void_xml
     @gateway.expects(:new_timestamp).returns('20090824160201')
 
-    valid_void_request_xml = <<-SRC
-<request timestamp="20090824160201" type="void">
+    valid_void_request_xml_timestamp    = %(timestamp="20090824160201")
+    valid_void_request_xml_request_type = %(type="void")
+    valid_void_request_xml_body         = <<-SRC
   <merchantid>your_merchant_id</merchantid>
   <account>your_account</account>
   <orderid>1</orderid>
@@ -186,7 +195,10 @@ SRC
 </request>
 SRC
 
-    assert_equal valid_void_request_xml, @gateway.build_void_request('1;4321;1234', {})
+    generated_xml = @gateway.build_void_request('1;4321;1234', {})
+    assert_match valid_void_request_xml_timestamp,    generated_xml
+    assert_match valid_void_request_xml_request_type, generated_xml
+    assert_match valid_void_request_xml_body,         generated_xml
   end
   
   def test_auth_xml
@@ -196,8 +208,9 @@ SRC
 
     @gateway.expects(:new_timestamp).returns('20090824160201')
 
-    valid_auth_request_xml = <<-SRC
-<request timestamp="20090824160201" type="auth">
+    valid_auth_request_xml_timestamp    = %(timestamp="20090824160201")
+    valid_auth_request_xml_request_type = %(type="auth")
+    valid_auth_request_xml_body         = <<-SRC
   <merchantid>your_merchant_id</merchantid>
   <account>your_account</account>
   <orderid>1</orderid>
@@ -218,14 +231,18 @@ SRC
 </request>
 SRC
 
-    assert_equal valid_auth_request_xml, @gateway.build_purchase_or_authorization_request(:authorization, @amount, @credit_card, options)
+    generated_xml = @gateway.build_purchase_or_authorization_request(:authorization, @amount, @credit_card, options)
+    assert_match valid_auth_request_xml_timestamp,    generated_xml
+    assert_match valid_auth_request_xml_request_type, generated_xml
+    assert_match valid_auth_request_xml_body,         generated_xml
   end
   
   def test_refund_xml
     @gateway.expects(:new_timestamp).returns('20090824160201')
 
-    valid_refund_request_xml = <<-SRC
-<request timestamp="20090824160201" type="rebate">
+    valid_refund_request_xml_timestamp    = %(timestamp="20090824160201")
+    valid_refund_request_xml_request_type = %(type="rebate")
+    valid_refund_request_xml_body         = <<-SRC
   <merchantid>your_merchant_id</merchantid>
   <account>your_account</account>
   <orderid>1</orderid>
@@ -237,8 +254,10 @@ SRC
 </request>
 SRC
 
-    assert_equal valid_refund_request_xml, @gateway.build_refund_request(@amount, '1;4321;1234', {})
-
+    generated_xml = @gateway.build_refund_request(@amount, '1;4321;1234', {})
+    assert_match valid_refund_request_xml_timestamp,    generated_xml
+    assert_match valid_refund_request_xml_request_type, generated_xml
+    assert_match valid_refund_request_xml_body,         generated_xml
   end
   
   def test_refund_with_rebate_secret_xml
@@ -246,8 +265,9 @@ SRC
     
     gateway.expects(:new_timestamp).returns('20090824160201')
 
-    valid_refund_request_xml = <<-SRC
-<request timestamp="20090824160201" type="rebate">
+    valid_refund_request_xml_timestamp    = %(timestamp="20090824160201")
+    valid_refund_request_xml_request_type = %(type="rebate")
+    valid_refund_request_xml_body         = <<-SRC
   <merchantid>your_merchant_id</merchantid>
   <account>your_account</account>
   <orderid>1</orderid>
@@ -260,7 +280,10 @@ SRC
 </request>
 SRC
 
-    assert_equal valid_refund_request_xml, gateway.build_refund_request(@amount, '1;4321;1234', {})
+    generated_xml = gateway.build_refund_request(@amount, '1;4321;1234', {})
+    assert_match valid_refund_request_xml_timestamp,    generated_xml
+    assert_match valid_refund_request_xml_request_type, generated_xml
+    assert_match valid_refund_request_xml_body,         generated_xml
 
   end
   

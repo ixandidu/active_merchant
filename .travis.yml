@@ -5,7 +5,5 @@ rvm:
   - 1.9.3
   - rbx
 
-script: "bundle exec rake test:units -t"
+script: "bundle exec rake -t"
 
-#notifications:
-#  disabled: true

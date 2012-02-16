@@ -48,7 +48,7 @@ class EfsnetTest < Test::Unit::TestCase
   end
 
   def test_refund
-    #@gateway.expects(:ssl_post).returns(successful_purchase_response)
+    @gateway.expects(:ssl_post).returns(successful_purchase_response)
     @gateway.refund(@amount, "transaction_id", :order_id => 5)
   end
 
