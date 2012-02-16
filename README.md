@@ -1,5 +1,7 @@
 # Active Merchant
 
+[![Build Status](https://secure.travis-ci.org/ixandidu/active_merchant.png)](http://travis-ci.org/ixandidu/active_merchant)
+
 Active Merchant is an extraction from the e-commerce system [Shopify](http://www.shopify.com).
 Shopify's requirements for a simple and unified API to access dozens of different payment
 gateways with very different internal APIs was the chief principle in designing the library.
@@ -178,4 +180,3 @@ The source code is hosted at [GitHub](http://github.com/Shopify/active_merchant)
 Please see the [ActiveMerchant Guide to Contributing](http://github.com/Shopify/active_merchant/wikis/contributing) for
 information on adding a new gateway to ActiveMerchant.
 
-[![Build Status](https://secure.travis-ci.org/ixandidu/active_merchant.png)](http://travis-ci.org/ixandidu/active_merchant)
